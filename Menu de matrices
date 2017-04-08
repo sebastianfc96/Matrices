@@ -255,10 +255,11 @@ void main()
 
 		}
 
-}
 }while(op!=0);
 getch();
 }
+
+
 
 void cargar_matriz(int A[MAX][MAX],int fil,int col)
 {
