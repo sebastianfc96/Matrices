@@ -1,0 +1,107 @@
+// matriz magica.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 20
+
+using namespace std;
+
+void cargar_matriz(int A[MAX][MAX],int fil,int col);
+void mostrar_matriz(int A[MAX][MAX],int fil,int col);
+
+
+
+void main()
+{
+	int A[MAX][MAX], B[MAX],i,j,c=0,fil,col,orden,c1,aux=0;
+
+	do{
+		cout<<"Ingrese la cantidad de columnas de su matriz: ";
+		cin>>col;
+	  }while(col>20);
+	do{
+	    cout<<"Ingrese la cantidad de filas de su matriz: ";
+		cin>>fil;
+	  }while(fil>20);
+	cargar_matriz(A,fil,col);
+	mostrar_matriz(A,fil,col);
+	orden=col;
+	for(i=0;i<fil;i++)
+		{
+			for(j=0;j<col;j++)
+			{aux=aux+A[i][j];
+			}
+			B[c]=aux;
+			c++;
+			aux=0;
+		}
+	
+	for(j=0;j<col;j++)
+		{
+			for(i=0;i<fil;i++)
+			{aux=aux+A[i][j];
+			}
+			B[c]=aux;
+			c++;
+			aux=0;
+		}
+	for(i=0;i<fil;i++)
+		{
+			for(j=0;j<col;j++)
+			{if(i==j)
+				{aux=aux+A[i][j];
+				}
+			}
+		}
+	B[c]=aux;
+	c++;
+	aux=0;
+	for(i=0;i<fil;i++)
+		{
+			for(j=0;j<col;j++)
+			{if((i+j)==(orden-1))
+				{aux=aux+A[i][j];
+				}
+			}
+		}
+	B[c]=aux;
+	aux=0;
+	c++;
+	c1=0;
+	for(i=0;i<(c-1);i++)
+		{
+			if(B[i]!=B[i+1])
+			c1=1;
+		}
+	if (c1==1)
+		cout<<"No es una matriz magica";
+	else
+		cout<<"Es una matriz magica";
+	getch();
+	
+}
+
+void cargar_matriz(int A[MAX][MAX],int fil,int col)
+{
+	int i,j;
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			{cout<<"Ingrese la matriz A["<<i<<"]["<<j<<"]";
+			 cin>>A[i][j];
+			}
+		}
+
+ 
+}
+void mostrar_matriz(int A[MAX][MAX],int fil,int col)
+{
+	int i,j;
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			{cout<<A[i][j]<<"\t";
+			}
+		cout<<endl;
+		}
+}
