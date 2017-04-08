@@ -1,6 +1,7 @@
 // matriz invertida.cpp : Defines the entry point for the console application.
 //
 
+
 #include "stdafx.h"
 #include <iostream>
 #include "conio.h"
@@ -11,10 +12,10 @@ using namespace std;
 void cargar_matriz(int A[MAX][MAX],int fil,int col);
 void mostrar_matriz(int A[MAX][MAX],int fil,int col);
 
-　
+
 void main()
 {
-	int fil,col,A[MAX][MAX],B[MAX][MAX],op,C[MAX][MAX],D[MAX],E[MAX][MAX];
+	int fil,col,A[MAX][MAX],B[MAX][MAX],op,C[MAX][MAX],D[MAX],E[MAX][MAX],c=0,aux=0;
 
 		do{
 		cout<<"              MENU          "<<endl;
@@ -22,6 +23,7 @@ void main()
 		cout<<"(2) suma de matrizes"<<endl;
 		cout<<"(3) resta de matrizes"<<endl;
 		cout<<"(4) multiplicacion de matrizes"<<endl;
+		cout<<"(5) Verificar si es o no matriz magica"<<endl;
 		cout<<"(0) Salir"<<endl;
 		cout<<endl;
 		cout<<"Ingrese la opcion que desea: ";
@@ -171,9 +173,78 @@ void main()
 					cout<<"No se puede realizar la multiplicacion";
 				break;
 			}
+		case 5:
+			{
+				int i,j,fil,col,orden,c1;
+
+				do{
+					cout<<"Ingrese la cantidad de columnas de su matriz: ";
+					cin>>col;
+				}while(col>20);
+				do{
+					cout<<"Ingrese la cantidad de filas de su matriz: ";
+					cin>>fil;
+				}while(fil>20);
+				cargar_matriz(A,fil,col);
+				mostrar_matriz(A,fil,col);
+				orden=col;
+				for(i=0;i<fil;i++)
+				{
+					for(j=0;j<col;j++)
+					{aux=aux+A[i][j];
+					}
+					D[c]=aux;
+					c++;
+					aux=0;
+				}
+
+				for(j=0;j<col;j++)
+				{
+					for(i=0;i<fil;i++)
+					{aux=aux+A[i][j];
+					}
+					D[c]=aux;
+					c++;
+					aux=0;
+				}
+				for(i=0;i<fil;i++)
+				{
+					for(j=0;j<col;j++)
+					{if(i==j)
+					{aux=aux+A[i][j];
+					}
+					}
+				}
+				D[c]=aux;
+				c++;
+				aux=0;
+				for(i=0;i<fil;i++)
+				{
+					for(j=0;j<col;j++)
+					{if((i+j)==(orden-1))
+					{aux=aux+A[i][j];
+					}
+					}
+				}
+				D[c]=aux;
+				aux=0;
+				c++;
+				c1=0;
+				for(i=0;i<(c-1);i++)
+				{
+					if(D[i]!=D[i+1])
+						c1=1;
+				}
+				if (c1==1)
+					cout<<"No es una matriz magica";
+				else
+					cout<<"Es una matriz magica";
+				
+					break;
+				}
 		case 0:
 			{
-				cout<<"Salir"<<endl;
+				cout<<"Salir";
 				break;
 			}
 		default:
@@ -184,10 +255,9 @@ void main()
 
 		}
 
+}
 }while(op!=0);
-
-	getch();
-
+getch();
 }
 
 void cargar_matriz(int A[MAX][MAX],int fil,int col)
