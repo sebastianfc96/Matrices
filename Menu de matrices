@@ -1,0 +1,215 @@
+// matriz invertida.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 20
+
+using namespace std;
+
+void cargar_matriz(int A[MAX][MAX],int fil,int col);
+void mostrar_matriz(int A[MAX][MAX],int fil,int col);
+
+　
+void main()
+{
+	int fil,col,A[MAX][MAX],B[MAX][MAX],op,C[MAX][MAX],D[MAX],E[MAX][MAX];
+
+		do{
+		cout<<"              MENU          "<<endl;
+		cout<<"(1) transponer la matriz"<<endl;
+		cout<<"(2) suma de matrizes"<<endl;
+		cout<<"(3) resta de matrizes"<<endl;
+		cout<<"(4) multiplicacion de matrizes"<<endl;
+		cout<<"(0) Salir"<<endl;
+		cout<<endl;
+		cout<<"Ingrese la opcion que desea: ";
+		cin>>op;
+
+		switch(op)
+		{
+		case 1: 
+			{
+				int i,j,fil1,col1,fil,col;
+				do{
+					cout<<"Ingrese la cantidad de columnas de su matriz: ";
+					cin>>col;
+				  }while(col>20);
+				do{
+					cout<<"Ingrese la cantidad de filas de su matriz: ";
+					cin>>fil;
+				  }while(fil>20);
+				cargar_matriz(A,fil,col);
+				mostrar_matriz(A,fil,col);
+				cout<<"La matriz transpuesta es: "<<endl;
+				fil1=col;
+				col1=fil;
+				for(i=0;i<fil1;i++)
+					{for(j=0;j<col1;j++)
+					{B[i][j]=A[j][i];
+					 cout<<B[i][j]<<"\t";
+					}
+					cout<<endl;
+					}
+				break;
+			}
+		case 2:
+			{
+				int i,j,col1,fil1;
+				do{
+					cout<<"Ingrese la cantidad de columnas de su matriz: ";
+					cin>>col;
+				  }while(col>20);
+				do{
+					cout<<"Ingrese la cantidad de filas de su matriz: ";
+					cin>>fil;
+				  }while(fil>20);
+				cargar_matriz(A,fil,col);
+				mostrar_matriz(A,fil,col);
+				do{
+					cout<<"Ingrese la cantidad de columnas de la matriz que desea sumar: ";
+					cin>>col1;
+				  }while(col>20);
+				do{
+					cout<<"Ingrese la cantidad de filas de la matriz que desea sumar: ";
+					cin>>fil1;
+				  }while(fil>20);
+				cargar_matriz(B,fil,col);
+				mostrar_matriz(B,fil,col);
+				if((fil1=fil) && (col1=col))
+				{
+				for(i=0;i<fil;i++)
+					for(j=0;j<col;j++)
+						C[i][j]=A[i][j]+B[i][j];
+				cout<<"La suma de las matrizes es: "<<endl;
+				mostrar_matriz(C,fil,col);
+				}
+				else
+					cout<<"No se puede realizar la suma";
+				break;
+				
+			}
+		case 3:
+			{
+				int i,j,col1,fil1;
+				do{
+					cout<<"Ingrese la cantidad de columnas de su matriz: ";
+					cin>>col;
+				  }while(col>20);
+				do{
+					cout<<"Ingrese la cantidad de filas de su matriz: ";
+					cin>>fil;
+				  }while(fil>20);
+				cargar_matriz(A,fil,col);
+				mostrar_matriz(A,fil,col);
+				do{
+					cout<<"Ingrese la cantidad de columnas de la matriz que desea restar: ";
+					cin>>col1;
+				  }while(col>20);
+				do{
+					cout<<"Ingrese la cantidad de filas de la matriz que desea restar: ";
+					cin>>fil1;
+				  }while(fil>20);
+				cargar_matriz(B,fil,col);
+				mostrar_matriz(B,fil,col);
+				if((fil1=fil) && (col1=col))
+				{
+				for(i=0;i<fil;i++)
+					for(j=0;j<col;j++)
+						C[i][j]=A[i][j]-B[i][j];
+				cout<<"La suma de las matrizes es: "<<endl;
+				mostrar_matriz(C,fil,col);
+				}
+				else
+					cout<<"No se puede realizar la resta";
+				break;
+			}
+		case 4:
+			{
+				int i,j,col1,fil1,k=0,fil2,col2;
+				do{
+					cout<<"Ingrese la cantidad de FILAS de su matriz: ";
+					cin>>fil;
+				  }while(fil>MAX);
+				do{
+					cout<<"Ingrese la cantidad de COLUMNAS de su matriz: ";
+					cin>>col;
+				  }while(col>MAX);
+				cargar_matriz(A,fil,col);
+				mostrar_matriz(A,fil,col);
+				do{
+					cout<<"Ingrese la cantidad de FILAS de la matriz que desea multiplicar: ";
+					cin>>fil1;
+				  }while(fil>MAX);
+				do{
+					cout<<"Ingrese la cantidad de COLUMNAS de la matriz que desea multiplicar: ";
+					cin>>col1;
+				  }while(col1>MAX);
+				cargar_matriz(B,fil1,col1);
+				mostrar_matriz(B,fil1,col1);
+				if(col==fil1)
+				{
+				fil2=fil;
+				col2=col1;
+
+				for(i=0;i<fil2;i++)
+				{
+					for(j=0;j<col2;j++)
+					{
+						C[i][j]=0;
+						for(k=0;k<col;k++)
+						{	
+							C[i][j]=C[i][j]+(A[i][k]*B[k][j]);
+						}
+					}
+				}	
+				cout<<"La multiplicacion de las matrizes es: "<<endl;
+				mostrar_matriz(C,fil2,col2);
+				}
+				else
+					cout<<"No se puede realizar la multiplicacion";
+				break;
+			}
+		case 0:
+			{
+				cout<<"Salir"<<endl;
+				break;
+			}
+		default:
+			{	
+				cout<<"Error"<<endl;
+				break;
+			}
+
+		}
+
+}while(op!=0);
+
+	getch();
+
+}
+
+void cargar_matriz(int A[MAX][MAX],int fil,int col)
+{
+	int i,j;
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			{cout<<"Ingrese la matriz A["<<i<<"]["<<j<<"]";
+			 cin>>A[i][j];
+			}
+		}
+
+ 
+}
+void mostrar_matriz(int A[MAX][MAX],int fil,int col)
+{
+	int i,j;
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			{cout<<A[i][j]<<"\t";
+			}
+		cout<<endl;
+		}
+	
+}
