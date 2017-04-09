@@ -1,0 +1,77 @@
+// matriz de vectores.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+
+
+struct matV{
+	int subvec[MAX];
+};
+
+void cargar_mat_vec(matV mat[MAX][MAX],int fil,int col,int n);
+void ordenar_subvector(matV mat[MAX][MAX],int fil,int col,int n);
+void mostrar_mat_vec(matV mat[MAX][MAX],int fil,int col,int n);
+
+
+void main()
+{
+	matV mat[MAX][MAX];
+	int fil,col,n,orden;
+	cout<<"Ingresar el orden de la matriz :";
+	cin>>orden;
+	fil=orden;
+	col=orden;
+	cout<<"Ingrese el tamano del subvector :";
+	cin>>n;
+	cargar_mat_vec(mat,fil,col,n);
+	ordenar_subvector(mat,fil,col,n);
+	mostrar_mat_vec(mat,fil,col,n);
+	getch();
+}
+
+void cargar_mat_vec(matV mat[MAX][MAX],int fil,int col,int n)
+{
+	int i,j,k;
+	for(i=0;i<fil;i++)
+		for(j=0;j<col;j++)
+			for(k=0;k<n;k++)
+			{
+				cout<<"Matriz["<<i<<"]["<<j<<"].subvector["<<k<<"] :";
+				cin>>mat[i][j].subvec[k];
+			}
+}
+
+void ordenar_subvector(matV mat[MAX][MAX],int fil,int col,int n)
+{
+	int aux,i,j,k,m;
+	for(i=0;i<fil;i++)
+		for(j=0;j<col;j++)
+			for(k=0;k<n-1;k++)
+				for(m=k+1;m<n;m++)
+				{	if(mat[i][j].subvec[m]<mat[i][j].subvec[k])
+					{
+						aux=mat[i][j].subvec[k];
+						mat[i][j].subvec[k]=mat[i][j].subvec[m];
+						mat[i][j].subvec[m]=aux;
+
+					}
+				}
+			
+}
+
+void mostrar_mat_vec(matV mat[MAX][MAX],int fil,int col,int n)
+{
+	int i,j,k;
+	for(i=0;i<fil;i++)
+		for(j=0;j<col;j++)
+			for(k=0;k<n;k++)
+			{
+				cout<<"Matriz["<<i<<"]["<<j<<"].subvector["<<k<<"]: "<<mat[i][j].subvec[k]<<endl;
+
+			}
+}
