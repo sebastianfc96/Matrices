@@ -1,0 +1,32 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+
+void main()
+{
+	int mat[MAX][MAX],i,j,cont,n,d=0;
+
+	cout<<"Ingrese el orden de la matriz que quiere cargar diagonalmente: ";
+	cin>>n;
+	for(cont=0;cont<((n*2)-1);cont++)
+		for(i=0;i<n;i++)
+			for(j=0;j<n;j++)
+			{
+				if(i+j==cont)
+					{d=d+1;
+					 mat[i][j]=d;
+					}
+			}
+
+	for(i=0;i<n;i++)
+			{for(j=0;j<n;j++)
+			{
+				cout<<mat[i][j]<<"\t";
+			}
+			 cout<<endl;
+			}
+	getch();
+}
